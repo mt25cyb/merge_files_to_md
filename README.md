@@ -6,69 +6,69 @@
 
 ### 控制台运行效果
 
-```
-==================================================
-  文件内容合并工具 v2.0.0
-  运行时间：2026-07-04 15:30:00
-==================================================
-
-[信息] 加载配置文件：D:\Dev-Workspace\merge_files_to_md.ini
-[成功] 配置文件解析完成
-
-[信息] 开始处理文件清单（共 5 条原始条目）
-[信息] 已加载 3 条忽略规则
-[提示] 通配符目录 logs\ 下所有文件均被忽略规则过滤，已跳过
-[成功] 文件清单处理完成，有效文件：22 个
-
-[信息] 正在生成 Markdown 合并文件...
-[成功] Markdown 文件生成完成
-  路径：D:\Dev-Workspace\_backups\完整文件代码-202607041530.md
-  包含：22 个文件
-
-[信息] 正在生成备份压缩包...
-[成功] 备份压缩包生成完成
-  路径：D:\Dev-Workspace\_backups\完整文件代码-202607041530.zip
-  包含：22 个文件
-
-==================================================
-  运行完成
-  成功处理：22 个文件
-  警告：1 条
-  错误：0 条
-==================================================
-
-按回车键退出...
-```
+  ```
+  ==================================================
+    文件内容合并工具 v2.0.0
+    运行时间：2026-07-04 15:30:00
+  ==================================================
+  
+  [信息] 加载配置文件：D:\Dev-Workspace\merge_files_to_md.ini
+  [成功] 配置文件解析完成
+  
+  [信息] 开始处理文件清单（共 5 条原始条目）
+  [信息] 已加载 3 条忽略规则
+  [提示] 通配符目录 logs\ 下所有文件均被忽略规则过滤，已跳过
+  [成功] 文件清单处理完成，有效文件：22 个
+  
+  [信息] 正在生成 Markdown 合并文件...
+  [成功] Markdown 文件生成完成
+    路径：D:\Dev-Workspace\_backups\完整文件代码-202607041530.md
+    包含：22 个文件
+  
+  [信息] 正在生成备份压缩包...
+  [成功] 备份压缩包生成完成
+    路径：D:\Dev-Workspace\_backups\完整文件代码-202607041530.zip
+    包含：22 个文件
+  
+  ==================================================
+    运行完成
+    成功处理：22 个文件
+    警告：1 条
+    错误：0 条
+  ==================================================
+  
+  按回车键退出...
+  ```
 
 ### 输出 Markdown 文档效果
 
-```markdown
-# WinDevEnv 项目源代码合并备份
-
-本文档为 WinDevEnv 项目的全量源代码合并备份
-生成时间：2026-07-04 15:30
-包含范围：主脚本、工具模块、配置文件、依赖清单
-
-> 本文件由合并工具自动生成，请勿手动修改
-
----
-
-## init-install-powershell-7.ps1
-```powershell
-# 主脚本内容示例
-Write-Host "Starting environment setup..."
-```
-
-## scripts\helper.psm1
-```powershell
-# 模块内容示例
-function Test-AdminPrivilege {
-    $currentPrincipal = New-Object Security.Principal.WindowsPrincipal([Security.Principal.WindowsIdentity]::GetCurrent())
-    return $currentPrincipal.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)
-}
-```
-
-```
+  ```markdown
+  # WinDevEnv 项目源代码合并备份
+  
+  本文档为 WinDevEnv 项目的全量源代码合并备份
+  生成时间：2026-07-04 15:30
+  包含范围：主脚本、工具模块、配置文件、依赖清单
+  
+  > 本文件由合并工具自动生成，请勿手动修改
+  
+  ---
+  
+  ## init-install-powershell-7.ps1
+    ```powershell
+    # 主脚本内容示例
+    Write-Host "Starting environment setup..."
+    ```
+  
+  ## scripts\helper.psm1
+    ```powershell
+    # 模块内容示例
+    function Test-AdminPrivilege {
+        $currentPrincipal = New-Object Security.Principal.WindowsPrincipal([Security.Principal.WindowsIdentity]::GetCurrent())
+        return $currentPrincipal.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)
+    }
+    ```
+  
+  ```
 
 ## ✨ 功能特性
 
