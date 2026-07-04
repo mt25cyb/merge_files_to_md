@@ -1,6 +1,71 @@
 # Merge Files to Markdown
 
-一款轻量、配置驱动的文件内容合并工具，可将指定目录下的多个源码/文本文件按顺序合并为单个 Markdown 文档，同时支持同源文件备份打包。纯 Python 原生实现，无第三方依赖，开箱即用。
+轻量、配置驱动的文件内容合并工具，可将指定目录下的多份源码/文本文件按序合并为单个 Markdown 文档，同时支持同源文件备份打包。纯 Python 原生实现，零第三方依赖，开箱即用。
+
+## 🎯 效果预览
+
+### 控制台运行效果
+```
+==================================================
+  文件内容合并工具 v2.0.0
+  运行时间：2026-07-04 15:30:00
+==================================================
+
+[信息] 加载配置文件：D:\Dev-Workspace\merge_files_to_md.ini
+[成功] 配置文件解析完成
+
+[信息] 开始处理文件清单（共 5 条原始条目）
+[信息] 已加载 3 条忽略规则
+[提示] 通配符目录 logs\ 下所有文件均被忽略规则过滤，已跳过
+[成功] 文件清单处理完成，有效文件：22 个
+
+[信息] 正在生成 Markdown 合并文件...
+[成功] Markdown 文件生成完成
+  路径：D:\Dev-Workspace\_backups\完整文件代码-202607041530.md
+  包含：22 个文件
+
+[信息] 正在生成备份压缩包...
+[成功] 备份压缩包生成完成
+  路径：D:\Dev-Workspace\_backups\完整文件代码-202607041530.zip
+  包含：22 个文件
+
+==================================================
+  运行完成
+  成功处理：22 个文件
+  警告：1 条
+  错误：0 条
+==================================================
+
+按回车键退出...
+```
+
+### 输出 Markdown 文档效果
+```markdown
+# WinDevEnv 项目源代码合并备份
+
+本文档为 WinDevEnv 项目的全量源代码合并备份
+生成时间：2026-07-04 15:30
+包含范围：主脚本、工具模块、配置文件、依赖清单
+
+> 本文件由合并工具自动生成，请勿手动修改
+
+---
+
+## init-install-powershell-7.ps1
+```powershell
+# 主脚本内容示例
+Write-Host "Starting environment setup..."
+```
+
+## scripts\helper.psm1
+```powershell
+# 模块内容示例
+function Test-AdminPrivilege {
+    $currentPrincipal = New-Object Security.Principal.WindowsPrincipal([Security.Principal.WindowsIdentity]::GetCurrent())
+    return $currentPrincipal.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)
+}
+```
+```
 
 ## ✨ 功能特性
 
@@ -46,20 +111,20 @@ cd merge_files_to_md
 
 配置文件与脚本同名，后缀为 `.ini`，支持 `#` 和 `;` 开头的整行注释。
 
-### [OutputFolder]
+### `[OutputFolder]`
 输出文件所在目录，支持相对路径（相对于脚本所在目录）与绝对路径，目录不存在时自动创建。
 
-### [OutputFileName]
+### `[OutputFileName]`
 输出文件的名称前缀，最终文件名格式：`前缀-YYYYMMDDHHmm.md`，同一分钟内重复运行自动追加秒数避免覆盖。
 
-### [Title]
+### `[Title]`
 合并后 Markdown 文档的一级置顶标题，取第一行非空内容。
 
-### [Options]
+### `[Options]`
 全局功能开关：
 - `EnableBackupZip`：是否生成源文件备份压缩包，可选 `true/false`，默认开启
 
-### [IgnoreList]
+### `[IgnoreList]`
 文件忽略规则，优先级最高，匹配后无论手动列出还是通配符展开的文件都会被过滤。
 - 支持精确路径匹配与 glob 通配符
 - 路径层级严格对应：`*.log` 仅匹配根目录，`utils\*.log` 仅匹配对应目录
@@ -71,13 +136,13 @@ cd merge_files_to_md
   secret.env
   ```
 
-### [FileList]
+### `[FileList]`
 待合并的文件清单，严格按从上到下的顺序输出。
 - 支持单个文件路径：`main.py`、`utils\helper.ps1`
 - 支持目录通配符：`scripts\*`（仅匹配目录下的直接文件，不递归子目录）
 - 支持绝对路径
 
-### [LangMap]
+### `[LangMap]`
 特殊文件名自定义语言标识，优先级高于后缀自动匹配，用于无后缀或自定义命名的文件。
 - 格式：`完整文件名 = 代码块语言标识`
 - 示例：
@@ -101,25 +166,6 @@ merge_files_to_md/
 ├── README.md                 # 项目说明
 ├── CHANGELOG.md              # 更新记录
 └── LICENSE                   # MIT 许可证
-```
-
-## 📝 输出格式示例
-```markdown
-# 项目标题
-
-这里是头部说明内容，支持 Markdown 语法
-
----
-
-## main.py
-```python
-# 文件内容
-```
-
-## utils\helper.ps1
-```powershell
-# 文件内容
-```
 ```
 
 ## 📄 许可证
