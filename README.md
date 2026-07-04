@@ -5,6 +5,7 @@
 ## 🎯 效果预览
 
 ### 控制台运行效果
+
 ```
 ==================================================
   文件内容合并工具 v2.0.0
@@ -40,6 +41,7 @@
 ```
 
 ### 输出 Markdown 文档效果
+
 ```markdown
 # WinDevEnv 项目源代码合并备份
 
@@ -65,6 +67,7 @@ function Test-AdminPrivilege {
     return $currentPrincipal.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)
 }
 ```
+
 ```
 
 ## ✨ 功能特性
@@ -87,20 +90,25 @@ function Test-AdminPrivilege {
 ## 🚀 快速开始
 
 ### 1. 获取项目
+
 ```bash
 git clone https://github.com/你的用户名/merge_files_to_md.git
 cd merge_files_to_md
 ```
 
 ### 2. 编辑配置
+
 复制并重命名示例配置文件 `merge_files_to_md.ini`，根据需求填写输出目录、文件清单、忽略规则等。
 
 ### 3. （可选）编写头部说明
+
 新建 `merge_files_to_md.header` 文件，写入需要放在文档开头的说明内容，支持完整 Markdown 语法。
 
 ### 4. 运行脚本
+
 - Windows：直接双击 `merge_files_to_md.py`
 - 命令行：
+  
   ```bash
   python merge_files_to_md.py
   ```
@@ -112,23 +120,31 @@ cd merge_files_to_md
 配置文件与脚本同名，后缀为 `.ini`，支持 `#` 和 `;` 开头的整行注释。
 
 ### `[OutputFolder]`
+
 输出文件所在目录，支持相对路径（相对于脚本所在目录）与绝对路径，目录不存在时自动创建。
 
 ### `[OutputFileName]`
+
 输出文件的名称前缀，最终文件名格式：`前缀-YYYYMMDDHHmm.md`，同一分钟内重复运行自动追加秒数避免覆盖。
 
 ### `[Title]`
+
 合并后 Markdown 文档的一级置顶标题，取第一行非空内容。
 
 ### `[Options]`
+
 全局功能开关：
+
 - `EnableBackupZip`：是否生成源文件备份压缩包，可选 `true/false`，默认开启
 
 ### `[IgnoreList]`
+
 文件忽略规则，优先级最高，匹配后无论手动列出还是通配符展开的文件都会被过滤。
+
 - 支持精确路径匹配与 glob 通配符
 - 路径层级严格对应：`*.log` 仅匹配根目录，`utils\*.log` 仅匹配对应目录
 - 示例：
+  
   ```ini
   *.log
   temp\*.tmp
@@ -137,27 +153,34 @@ cd merge_files_to_md
   ```
 
 ### `[FileList]`
+
 待合并的文件清单，严格按从上到下的顺序输出。
+
 - 支持单个文件路径：`main.py`、`utils\helper.ps1`
 - 支持目录通配符：`scripts\*`（仅匹配目录下的直接文件，不递归子目录）
 - 支持绝对路径
 
 ### `[LangMap]`
+
 特殊文件名自定义语言标识，优先级高于后缀自动匹配，用于无后缀或自定义命名的文件。
+
 - 格式：`完整文件名 = 代码块语言标识`
 - 示例：
+  
   ```ini
   .env = ini
   Dockerfile = dockerfile
   ```
 
 ### 外部头部文件
+
 - 文件名：`脚本同名.header`
 - 内容会原样输出到标题下方、文件清单上方，不包裹代码块
 - 支持完整 Markdown 语法，内容非空时自动在下方添加分隔线
 - 文件不存在或内容为空时自动跳过
 
 ## 📁 项目结构
+
 ```
 merge_files_to_md/
 ├── merge_files_to_md.py      # 主脚本
