@@ -43,30 +43,30 @@
 ### 输出 Markdown 文档效果
 
 ```markdown
-- # WinDevEnv 项目源代码合并备份
-- 
-- 本文档为 WinDevEnv 项目的全量源代码合并备份
-- 生成时间：2026-07-04 15:30
-- 包含范围：主脚本、工具模块、配置文件、依赖清单
-- 
-- > 本文件由合并工具自动生成，请勿手动修改
-- 
-- ---
--
-- ## init-install-powershell-7.ps1
-- ```powershell
-- # 主脚本内容示例
-- Write-Host "Starting environment setup..."
-- ```
--
-- ## scripts\helper.psm1
-- ```powershell
-- # 模块内容示例
-- function Test-AdminPrivilege {
--     $currentPrincipal = New-Object Security.Principal.WindowsPrincipal([Security.Principal.WindowsIdentity]::GetCurrent())
--     return $currentPrincipal.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)
-- }
-- ```
+| # WinDevEnv 项目源代码合并备份
+| 
+| 本文档为 WinDevEnv 项目的全量源代码合并备份
+| 生成时间：2026-07-04 15:30
+| 包含范围：主脚本、工具模块、配置文件、依赖清单
+| 
+| > 本文件由合并工具自动生成，请勿手动修改
+| 
+| ---
+|
+| ## init-install-powershell-7.ps1
+| ```powershell
+| # 主脚本内容示例
+| Write-Host "Starting environment setup..."
+| ```
+|
+| ## scripts\helper.psm1
+| ```powershell
+| # 模块内容示例
+| function Test-AdminPrivilege {
+|     $currentPrincipal = New-Object Security.Principal.WindowsPrincipal([Security.Principal.WindowsIdentity]::GetCurrent())
+|     return $currentPrincipal.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)
+| }
+| ```
 ```
 
 ## ✨ 功能特性
