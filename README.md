@@ -92,7 +92,7 @@
 ### 1. 获取项目
 
 ```bash
-git clone https://github.com/你的用户名/merge_files_to_md.git
+git clone https://github.com/mt25cyb/merge_files_to_md.git
 cd merge_files_to_md
 ```
 
