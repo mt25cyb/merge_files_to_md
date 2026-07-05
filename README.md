@@ -6,69 +6,68 @@
 
 ### 控制台运行效果
 
-  ```
-  ==================================================
-    文件内容合并工具 v2.0.0
-    运行时间：2026-07-04 15:30:00
-  ==================================================
-  
-  [信息] 加载配置文件：D:\Dev-Workspace\merge_files_to_md.ini
-  [成功] 配置文件解析完成
-  
-  [信息] 开始处理文件清单（共 5 条原始条目）
-  [信息] 已加载 3 条忽略规则
-  [提示] 通配符目录 logs\ 下所有文件均被忽略规则过滤，已跳过
-  [成功] 文件清单处理完成，有效文件：22 个
-  
-  [信息] 正在生成 Markdown 合并文件...
-  [成功] Markdown 文件生成完成
-    路径：D:\Dev-Workspace\_backups\完整文件代码-202607041530.md
-    包含：22 个文件
-  
-  [信息] 正在生成备份压缩包...
-  [成功] 备份压缩包生成完成
-    路径：D:\Dev-Workspace\_backups\完整文件代码-202607041530.zip
-    包含：22 个文件
-  
-  ==================================================
-    运行完成
-    成功处理：22 个文件
-    警告：1 条
-    错误：0 条
-  ==================================================
-  
-  按回车键退出...
-  ```
+```
+==================================================
+  文件内容合并工具 v2.0.0
+  运行时间：2026-07-04 15:30:00
+==================================================
+
+[信息] 加载配置文件：D:\Dev-Workspace\merge_files_to_md.ini
+[成功] 配置文件解析完成
+
+[信息] 开始处理文件清单（共 5 条原始条目）
+[信息] 已加载 3 条忽略规则
+[提示] 通配符目录 logs\ 下所有文件均被忽略规则过滤，已跳过
+[成功] 文件清单处理完成，有效文件：22 个
+
+[信息] 正在生成 Markdown 合并文件...
+[成功] Markdown 文件生成完成
+  路径：D:\Dev-Workspace\_backups\完整文件代码-202607041530.md
+  包含：22 个文件
+
+[信息] 正在生成备份压缩包...
+[成功] 备份压缩包生成完成
+  路径：D:\Dev-Workspace\_backups\完整文件代码-202607041530.zip
+  包含：22 个文件
+
+==================================================
+  运行完成
+  成功处理：22 个文件
+  警告：1 条
+  错误：0 条
+==================================================
+
+按回车键退出...
+```
 
 ### 输出 Markdown 文档效果
 
-  ```markdown
-  # WinDevEnv 项目源代码合并备份
-  
-  本文档为 WinDevEnv 项目的全量源代码合并备份
-  生成时间：2026-07-04 15:30
-  包含范围：主脚本、工具模块、配置文件、依赖清单
-  
-  > 本文件由合并工具自动生成，请勿手动修改
-  
-  ---
-  
-  ## init-install-powershell-7.ps1
-    ```powershell
-    # 主脚本内容示例
-    Write-Host "Starting environment setup..."
-    ```
-  
-  ## scripts\helper.psm1
-    ```powershell
-    # 模块内容示例
-    function Test-AdminPrivilege {
-        $currentPrincipal = New-Object Security.Principal.WindowsPrincipal([Security.Principal.WindowsIdentity]::GetCurrent())
-        return $currentPrincipal.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)
-    }
-    ```
-  
+```markdown
+# WinDevEnv 项目源代码合并备份
+
+本文档为 WinDevEnv 项目的全量源代码合并备份
+生成时间：2026-07-04 15:30
+包含范围：主脚本、工具模块、配置文件、依赖清单
+
+> 本文件由合并工具自动生成，请勿手动修改
+
+---
+
+## init-install-powershell-7.ps1
+  ```powershell
+  # 主脚本内容示例
+  Write-Host "Starting environment setup..."
   ```
+
+## scripts\helper.psm1
+  ```powershell
+  # 模块内容示例
+  function Test-AdminPrivilege {
+      $currentPrincipal = New-Object Security.Principal.WindowsPrincipal([Security.Principal.WindowsIdentity]::GetCurrent())
+      return $currentPrincipal.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)
+  }
+  ```
+```
 
 ## ✨ 功能特性
 
@@ -107,6 +106,7 @@ cd merge_files_to_md
 ### 4. 运行脚本
 
 - Windows：直接双击 `merge_files_to_md.py`
+
 - 命令行：
   
   ```bash
@@ -118,6 +118,8 @@ cd merge_files_to_md
 ## ⚙️ 配置说明
 
 配置文件与脚本同名，后缀为 `.ini`，支持 `#` 和 `;` 开头的整行注释。
+
+
 
 ### `[OutputFolder]`
 
@@ -137,12 +139,32 @@ cd merge_files_to_md
 
 - `EnableBackupZip`：是否生成源文件备份压缩包，可选 `true/false`，默认开启
 
+- `ShowFileEncoding`：是否在文件标题后显示编码信息（true/false）
+  开启后格式示例：## utils\helper.ps1 (GBK)
+  不填写此项时默认关闭
+
+- `SplitMdMaxSize`：
+  可选，单位 KB，0 / 空白代表不开启分片，仅输出单个完整MD文档。
+  开启后自动拆分文档，保证单个源文件完整内容不会跨分片截断；超过阈值的单文件会独立分片并添加警告。
+
+- `ExportWholeSingleFile`：
+  仅在 SplitMdMaxSize > 0 时生效；true = 分片同时输出一份不分片完整总文档；false = 仅输出分片文件。
+  
+  分片排版规则：
+  
+  1. 所有分片首行放置分片标注提示，下方统一 `---` 分隔线
+  2. 仅第一个分片包含文档一级标题与 `.header` 头部说明
+  3. 第2及以后分片无全局头部，直接展示文件内容
+  4. 分片提示内文件列表单行最多6个，超长自动换行
+
 ### `[IgnoreList]`
 
 文件忽略规则，优先级最高，匹配后无论手动列出还是通配符展开的文件都会被过滤。
 
 - 支持精确路径匹配与 glob 通配符
+
 - 路径层级严格对应：`*.log` 仅匹配根目录，`utils\*.log` 仅匹配对应目录
+
 - 示例：
   
   ```ini
@@ -165,6 +187,7 @@ cd merge_files_to_md
 特殊文件名自定义语言标识，优先级高于后缀自动匹配，用于无后缀或自定义命名的文件。
 
 - 格式：`完整文件名 = 代码块语言标识`
+
 - 示例：
   
   ```ini
